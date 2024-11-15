@@ -11,8 +11,9 @@
     <h1>Погода в твоєму місті</h1>
     <div class="search">
       <input type="text" id="city" placeholder="Введіть місто">
-      <button onclick="getWeather()">Отримати погоду</button>
+      <button onclick="getWeather(document.getElementById('city').value)">Отримати погоду</button>
     </div>
+    <button id="toggle-units-button" onclick="toggleUnits()" style="display: none;">Перемкнути °C/°F</button>
     <div class="weather-info">
       <h2 id="city-name"></h2>
       <img id="weather-icon" alt="Іконка погоди" style="display: none;">

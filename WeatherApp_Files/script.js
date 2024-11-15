@@ -1,8 +1,19 @@
-async function getWeather() {
-    const city = document.getElementById("city").value;
+let isCelsius = true; // початковий стан в Цельсіях
+let currentCity = ''; // змінна для зберігання назви поточного міста
+async function getWeather(city = null) {
+    // currentCity || document.getElementById("city").value;
+    if(city){
+        currentCity = city;
+    }else if(!currentCity){
+        alert("Будь ласка, введіть назву міста");
+        return;
+    }
+        
+
     const apiKey = "4f70c532cd37606000c3d68f88ae0e24"; 
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=uk`;
-  
+    const units = isCelsius ? `metric` : `imperial`; // Вибір одиниці
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=${units}&lang=uk`;
+
     try {
       const response = await fetch(apiUrl);
       if (!response.ok) {
@@ -11,14 +22,19 @@ async function getWeather() {
   
       const data = await response.json();
       displayWeather(data);
+
+      // Показуєм кнопку для перемикання одиниць
+      document.getElementById("toggle-units-button").style.display = "block";
+
     } catch (error) {
       alert(`Помилка: ${error.message}`);
     }
   }
 
   function displayWeather(data) {
+    const temperatureUnit = isCelsius ? '°C' : '°F';
     document.getElementById("city-name").innerText = `Місто: ${data.name}`;
-    document.getElementById("temperature").innerText = `Температура: ${data.main.temp}°C`;
+    document.getElementById("temperature").innerText = `Температура: ${data.main.temp.toFixed(2)}${temperatureUnit}`;
     document.getElementById("description").innerText = `Опис: ${data.weather[0].description}`;
     document.getElementById("humidity").innerText = `Вологість: ${data.main.humidity}%`;
 
@@ -32,10 +48,12 @@ async function getWeather() {
 
   // Додаємо анімацію для weather-info
   const weatherInfo = document.querySelector('.weather-info');
-
-  // Видаляємо клас .show і додаємо його з невеликою затримкою для перезапуску анімації
   weatherInfo.classList.remove('show');
-  setTimeout(() => {
-    weatherInfo.classList.add('show');
-  }, 50);
+  void weatherInfo.offsetWidth;
+  weatherInfo.classList.add('show');
   }  
+  // Функція для перемикання градусів
+  function toggleUnits(){
+    isCelsius = !isCelsius;
+    getWeather(); 
+  }
