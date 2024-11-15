@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кліматичний Додаток</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="weather-app">
+    <h1>Погода в твоєму місті</h1>
+    <div class="search">
+      <input type="text" id="city" placeholder="Введіть місто">
+      <button onclick="getWeather()">Отримати погоду</button>
+    </div>
+    <div class="weather-info">
+      <h2 id="city-name"></h2>
+      <img id="weather-icon" alt="Іконка погоди" style="display: none;">
+      <p id="temperature"></p>
+      <p id="description"></p>
+      <p id="humidity"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
