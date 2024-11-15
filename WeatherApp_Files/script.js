@@ -97,3 +97,19 @@ function setWeatherBackground(weatherMain) {
   // Оновлюємо відео
   backgroundVideo.load();
 }
+
+function toggleTheme() {
+    document.body.classList.toggle('dark-theme'); // Додаємо або видаляємо клас .dark-theme
+  
+    // Можна зберегти вибір користувача у localStorage
+    const theme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+    localStorage.setItem('theme', theme);
+  }
+  
+  // Завантаження теми при завантаженні сторінки
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-theme');
+    }
+  });

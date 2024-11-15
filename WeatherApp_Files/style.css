@@ -10,7 +10,118 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  background-color: #f0f0f0; 
   transition: background-color 0.5s ease, background-image 0.5s ease;
+  color: #333;
+}
+
+/* Стиль для темної теми */
+body.dark-theme {
+  background-color: #1e1e1e; 
+  color: #f0f0f0;
+}
+
+/* Стилі для кнопки перемикання теми */
+#theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 60px;
+  height: 30px;
+  background-color: #f39c12;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  transition: background-color 0.3s;
+}
+
+#theme-toggle .toggle-thumb {
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+  position: relative;
+
+}
+
+.icon-sun, .icon-moon {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-sun{
+  transform: translateX(8px);
+}
+
+.icon-moon{
+  transform: translateX(-8px);
+
+}
+
+/* Позиції іконок у світлій темі */
+body:not(.dark-theme) .icon-sun {
+  opacity: 1;
+}
+
+body:not(.dark-theme) .icon-moon {
+  opacity: 0;
+}
+
+/* Позиції іконок у темній темі */
+body.dark-theme .icon-sun {
+  opacity: 0;
+}
+
+body.dark-theme .icon-moon {
+  opacity: 1;
+}
+
+
+  
+
+/* Перемикач у світлій темі */
+body:not(.dark-theme) #theme-toggle {
+  background-color: #f39c12;
+}
+
+body:not(.dark-theme) .toggle-thumb {
+  transform: translateX(0);
+}
+
+body:not(.dark-theme) .icon-sun {
+  opacity: 1;
+}
+
+body:not(.dark-theme) .icon-moon {
+  opacity: 0;
+}
+
+/* Перемикач у темній темі */
+body.dark-theme #theme-toggle {
+  background-color: #2c3e50;
+}
+
+body.dark-theme .toggle-thumb {
+  transform: translateX(30px);
+}
+
+body.dark-theme .icon-sun {
+  opacity: 0;
+}
+
+body.dark-theme .icon-moon {
+  opacity: 1;
+}
+
+body.dark-theme #theme-toggle {
+  background-color: #f0f0f0;
   color: #333;
 }
 
@@ -74,7 +185,8 @@ body.default-weather {
 }
 
 .weather-app {
-  background: #ffffff;
+  position: relative;
+  background: rgba(255, 255, 255, 0.9); /* Напівпрозорий фон для світлої теми */
   border-radius: 15px;
   padding: 25px;
   max-width: 400px;
