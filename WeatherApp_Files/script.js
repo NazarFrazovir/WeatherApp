@@ -94,7 +94,6 @@ function setWeatherBackground(weatherMain) {
       backgroundVideo.src = 'videos/default.mp4';
       break;
   }
-
   // Оновлюємо відео
   backgroundVideo.load();
 }
