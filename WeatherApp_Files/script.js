@@ -1,7 +1,7 @@
 let isCelsius = true; // початковий стан в Цельсіях
 let currentCity = ''; // змінна для зберігання назви поточного міста
+
 async function getWeather(city = null) {
-    // currentCity || document.getElementById("city").value;
     if(city){
         currentCity = city;
     }else if(!currentCity){
@@ -25,6 +25,9 @@ async function getWeather(city = null) {
 
       // Показуєм кнопку для перемикання одиниць
       document.getElementById("toggle-units-button").style.display = "block";
+
+      // Змінюємо фон залежно від основного стану погоди
+    setWeatherBackground(data.weather[0].main);
 
     } catch (error) {
       alert(`Помилка: ${error.message}`);
@@ -52,8 +55,46 @@ async function getWeather(city = null) {
   void weatherInfo.offsetWidth;
   weatherInfo.classList.add('show');
   }  
+
+
   // Функція для перемикання градусів
   function toggleUnits(){
     isCelsius = !isCelsius;
     getWeather(); 
   }
+
+
+
+  // Функція для зміни відео фону залежно від стану погоди
+function setWeatherBackground(weatherMain) {
+  const backgroundVideo = document.getElementById("background-video");
+
+  switch (weatherMain.toLowerCase()) {
+    case 'clear':
+      backgroundVideo.src = 'videos/clear.mp4';
+      break;
+    case 'clouds':
+      backgroundVideo.src = 'videos/cloudy.mp4';
+      break;
+    case 'rain':
+    case 'drizzle':
+      backgroundVideo.src = 'videos/rain.mp4';
+      break;
+    case 'snow':
+      backgroundVideo.src = 'videos/snow.mp4';
+      break;
+    case 'thunderstorm':
+      backgroundVideo.src = 'videos/thunderstorm.mp4';
+      break;
+    case 'mist':
+    case 'fog':
+      backgroundVideo.src = 'videos/mist.mp4';
+      break;
+    default:
+      backgroundVideo.src = 'videos/default.mp4';
+      break;
+  }
+
+  // Оновлюємо відео
+  backgroundVideo.load();
+}

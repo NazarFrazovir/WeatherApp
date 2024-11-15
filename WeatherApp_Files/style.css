@@ -10,8 +10,67 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #6dd5ed, #2193b0);
+  transition: background-color 0.5s ease, background-image 0.5s ease;
   color: #333;
+}
+
+/* Фонове відео */
+#background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Позаду контенту */
+  opacity: 0.7; /* Прозорість відео для кращої видимості тексту */
+}
+
+/* Ясна погода */
+body.clear {
+  background-color: #87ceeb; /* Світло-блакитний колір */
+  background-image: url('clear-sky.jpg'); /* Фонове зображення для ясної погоди */
+  background-size: cover;
+}
+
+/* Хмарна погода */
+body.cloudy {
+  background-color: #b0c4de; /* Світло-сірий колір */
+  background-image: url('cloudy.jpg');
+  background-size: cover;
+}
+
+/* Дощова погода */
+body.rain {
+  background-color: #a9a9a9; /* Темно-сірий колір */
+  background-image: url('rain.jpg');
+  background-size: cover;
+}
+
+/* Сніг */
+body.snow {
+  background-color: #f0f8ff; /* Світло-білий колір */
+  background-image: url('snow.jpg');
+  background-size: cover;
+}
+
+/* Гроза */
+body.thunderstorm {
+  background-color: #2f4f4f; /* Темно-сірий з зеленим відтінком */
+  background-image: url('thunderstorm.jpg');
+  background-size: cover;
+}
+
+/* Туман / імла */
+body.mist {
+  background-color: #dcdcdc; /* Світло-сірий колір */
+  background-image: url('mist.jpg');
+  background-size: cover;
+}
+
+/* Фон за замовчуванням */
+body.default-weather {
+  background-color: #2193b0;
 }
 
 .weather-app {
@@ -22,6 +81,8 @@ body {
   width: 100%;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   text-align: center;
+  z-index: 1; /* Поверх відео */
+
 }
 
 h1 {
@@ -51,8 +112,7 @@ button {
   color: white;
   font-size: 1rem;
   cursor: pointer;
-  border-radius: 0 8px 8px 0;
-  transition: background-color 0.3s, transform 0.1s;
+  border-radius: 8px;
 }
 
 button:hover {
