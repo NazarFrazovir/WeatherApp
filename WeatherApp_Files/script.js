@@ -113,3 +113,55 @@ function toggleTheme() {
       document.body.classList.add('dark-theme');
     }
   });
+
+  // Перемикання між розділами
+function showSection(sectionId) {
+    // Ховаємо всі розділи
+    document.querySelectorAll('.section').forEach((section) => {
+      section.classList.remove('active');
+    });
+    // Показуємо обраний розділ
+    document.getElementById(sectionId).classList.add('active');
+  }
+
+
+  // Система авторизації
+function handleAuth(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    
+    const registeredUser = localStorage.getItem('username');
+    const registeredPassword = localStorage.getItem('password');
+  
+    if (registeredUser && registeredPassword) {
+      if (username === registeredUser && password === registeredPassword) {
+        alert("Ви успішно увійшли!");
+        localStorage.setItem('isLoggedIn', 'true');
+        showSection('profile');
+        updateMenu();
+      } else {
+        alert("Невірне ім'я користувача або пароль.");
+      }
+    } else {
+      alert("Реєстрація пройшла успішно!");
+      localStorage.setItem('username', username);
+      localStorage.setItem('password', password);
+      localStorage.setItem('isLoggedIn', 'true');
+      showSection('profile');
+      updateMenu();
+    }
+  }
+
+  // Оновлення меню на основі статусу входу
+function updateMenu() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    document.getElementById('auth-link').style.display = isLoggedIn ? 'none' : 'inline-block';
+    document.getElementById('profile-link').style.display = isLoggedIn ? 'inline-block' : 'none';
+  }
+  
+  // Перевірка статусу входу при завантаженні сторінки
+  document.addEventListener('DOMContentLoaded', () => {
+    updateMenu();
+  });
+

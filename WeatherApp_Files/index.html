@@ -5,38 +5,81 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Кліматичний Додаток</title>
   <link rel="stylesheet" href="style.css">
-</head>
+  
+    <!-- Підключення Leaflet.js -->
 
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+</head>
 <body>
 
-<!-- Фонове відео -->
-<video id="background-video" autoplay loop muted playsinline></video>
+  <!-- Фонове відео -->
+  <video id="background-video" autoplay loop muted playsinline></video>
 
-<!-- Перемикач теми -->
-<div id="theme-toggle" onclick="toggleTheme()">
-  <div class="toggle-thumb">
-    <img src="images/sun.png" class="icon-sun" alt="Sun Icon">
-    <img src="images/moon.png" class="icon-moon" alt="Moon Icon">
-  </div>
-</div>
-
-  <div class="weather-app">
-    <h1>Погода в твоєму місті</h1>
-    <div class="search">
-      <input type="text" id="city" placeholder="Введіть місто">
-      <button onclick="getWeather(document.getElementById('city').value)">Отримати погоду</button>
-    </div>
-
-    <button id="toggle-units-button" onclick="toggleUnits()" style="display: none;">Перемкнути °C/°F</button>
-
-    <div class="weather-info">
-      <h2 id="city-name"></h2>
-      <img id="weather-icon" alt="Іконка погоди" style="display: none;">
-      <p id="temperature"></p>
-      <p id="description"></p>
-      <p id="humidity"></p>
+  <!-- Головне меню -->
+  <header>
+    <nav class="main-menu">
+      <a href="#" onclick="showSection('weather')">Погода</a>
+      <a href="#" onclick="showSection('map')">Карта</a>
+      <a href="#" onclick="showSection('profile')" id="profile-link">Кабінет</a>
+      <a href="#" onclick="showSection('auth')" id="auth-link">Вхід/Зареєструватись</a>
+    </nav>
+       <!-- Перемикач теми -->
+  <div id="theme-toggle" onclick="toggleTheme()">
+    <div class="toggle-thumb">
+      <img src="images/sun.png" class="icon-sun" alt="Sun Icon">
+      <img src="images/moon.png" class="icon-moon" alt="Moon Icon">
     </div>
   </div>
+  </header>
+
+  <!-- Основні розділи програми -->
+  <main>
+    <!-- Розділ "Погода в твоєму місті" -->
+    <section id="weather" class="section active">
+      <div class="weather-app">
+        <h1>Погода в твоєму місті</h1>
+        <div class="search">
+          <input type="text" id="city" placeholder="Введіть місто">
+          <button onclick="getWeather(document.getElementById('city').value)">Отримати погоду</button>
+        </div>
+        <button id="toggle-units-button" onclick="toggleUnits()" style="display: none;">Перемкнути °C/°F</button>
+        <div class="weather-info">
+          <h2 id="city-name"></h2>
+          <img id="weather-icon" alt="Іконка погоди" style="display: none;">
+          <p id="temperature"></p>
+          <p id="description"></p>
+          <p id="humidity"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Розділ "Інтерактивна карта" -->
+    <section id="map" class="section">
+      <h2>Інтерактивна карта погоди</h2>
+      <div id="map-container">
+        <div id="map-container" style="width: 100%; height: 500px;"></div>
+      </div>
+    </section>
+
+    <!-- Розділ "Кабінет користувача" -->
+    <section id="profile" class="section">
+      <h2>Кабінет користувача</h2>
+      <p>Вітаємо у вашому кабінеті! Тут ви зможете переглянути свій профіль.</p>
+    </section>
+
+    <!-- Розділ "Вхід/Реєстрація" -->
+    <section id="auth" class="section">
+      <h2>Вхід або Реєстрація</h2>
+      <form id="auth-form" onsubmit="handleAuth(event)">
+        <input type="text" id="username" placeholder="Користувач" required>
+        <input type="password" id="password" placeholder="Пароль" required>
+        <button type="submit">Увійти</button>
+        <button type="button" onclick="toggleRegistration()">Зареєструватися</button>
+      </form>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>
