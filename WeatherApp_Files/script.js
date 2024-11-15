@@ -29,4 +29,13 @@ async function getWeather() {
 
   weatherIcon.src = iconUrl;
   weatherIcon.style.display = "block"; // Показуємо іконку
+
+  // Додаємо анімацію для weather-info
+  const weatherInfo = document.querySelector('.weather-info');
+
+  // Видаляємо клас .show і додаємо його з невеликою затримкою для перезапуску анімації
+  weatherInfo.classList.remove('show');
+  setTimeout(() => {
+    weatherInfo.classList.add('show');
+  }, 50);
   }  
